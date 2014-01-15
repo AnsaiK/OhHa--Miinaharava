@@ -1,0 +1,11 @@
+Aihe: miinaharava
+
+Pelin kuvaus:
+
+Perinteinen yhden hengen miinaharavapeli, jossa pelaaja yrittää löytää ruudukosta miinat. Pelin alussa ruudukon sisältö on piilossa. Hiirellä klikattaessa ruutua sen sisältö tulee näkyviin. Avattu ruutu antaa numerovihjeen ympäröivien miinojen lukumäärästä. Tyhjää ruutua klikatessa aukeaa mahdollinen klikattuun ruutuun kosketuksissa oleva tyhjien ruutujen alue. Miinoja voi merkata lipulla ja epävarmoja ruutuja kysymysmerkillä.
+
+Peli on läpi, kun pelaaja on löytänyt yksiselitteisesti kaikki miinat. Peli loppuu jos pelaaja avaa miinan sisältävän ruudun.
+
+Pelin toiminnot: 
+- Uusi peli
+- Lopetus
