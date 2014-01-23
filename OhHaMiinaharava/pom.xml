@@ -42,7 +42,16 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>0.30</version>
-        </plugin>
+    <configuration>
+        <targetClasses>
+            <param>Miinaharava.logiikka.Pelilauta*</param>
+	    <param>Miinaharava.logiikka.Ruutu*</param>
+        </targetClasses>
+        <targetTests>
+            <param>Miinaharava.logiikka.RuutuTestit*</param>
+        </targetTests>
+    </configuration>
+</plugin>
     </plugins>
 </build>
 </project>

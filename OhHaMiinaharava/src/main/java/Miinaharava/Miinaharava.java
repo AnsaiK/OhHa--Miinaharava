@@ -1,13 +1,14 @@
-package ohhamiinaharava.ohhamiinaharava;
+package Miinaharava;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import Miinaharava.logiikka.Pelilauta;
+
+public class Miinaharava {
+
+    public static void main(String[] args) {
+
+        Pelilauta lauta = new Pelilauta(10, 10);
+        
+        lauta.PiirraTekstiLauta(); // testausta varten
+
     }
 }
