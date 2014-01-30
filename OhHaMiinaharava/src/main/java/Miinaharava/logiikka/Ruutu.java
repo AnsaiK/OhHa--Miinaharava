@@ -12,15 +12,17 @@ public class Ruutu {
 
     private int x;
     private int y;
+    private int ymparoivatMiinatLkm;
     private boolean pommi;
-    private int pommienLkm;
     private boolean avattu;
+    private boolean lippu;
 
     public Ruutu(int x, int y) {
         this.x = x;
         this.y = y;
         this.pommi = false;
         this.avattu = false;
+        this.lippu = false;
     }
 
     public int getX() {
@@ -31,78 +33,48 @@ public class Ruutu {
         return y;
     }
 
-    public int getPommienLkm() {
-        return pommienLkm;
-    }
-        
-    public void setPommi() {
-        pommi = true;
-    }
-    
-    public void poistaPommi() {  // uutta peliä varten
-        pommi = false;
-    }
-    
-    
-    
-
-    
-//    ruutujen avaamista varten seuraavat kommentoinnilla poistetut metodit
-    
-//    public void setAvattu() {
-//        this.avattu = true;
-//    }
-//    
-//    public boolean getAvattu() {
-//        return this.avattu;
-//    }
-    
-    public void setYmparoivienLkm(int lkm) {
-        if (pommi == true) {
-            this.pommienLkm = 99;
-        } else {
-        this.pommienLkm = lkm;
-        }
+    public int getYmparoivatMiinatLkm() {
+        return ymparoivatMiinatLkm;
     }
 
-    public boolean onkoPommi() {
+    public void setMiina(boolean b) {
+        pommi = b;
+    }
+
+    public void setAvattu(boolean b) {
+        this.avattu = b;
+    }
+
+    public void setLippu(boolean b) {
+        this.lippu = b;
+    }
+
+    public boolean getMiina() {
         return this.pommi;
     }
 
-    @Override
-    public String toString() {          
-        if (this.pommi == true) {
-            return "*";
+    public boolean getLippu() {
+        return this.lippu;
+    }
+
+    public boolean getAvattu() {
+        return this.avattu;
+    }
+
+    public void setYmparoivienLkm(int lkm) {
+        if (pommi == true) {
+            this.ymparoivatMiinatLkm = 99; // pommi
         } else {
-            return "" + pommienLkm;
+            this.ymparoivatMiinatLkm = lkm;
         }
     }
 
-//    @Override
-//    public int hashCode() {
-//        int hash = 3;
-//        hash = 53 * hash + this.x;
-//        hash = 53 * hash + this.y;
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (getClass() != obj.getClass()) {
-//            return false;
-//        }
-//        final Ruutu other = (Ruutu) obj;
-//        if (this.x != other.x) {
-//            return false;
-//        }
-//        if (this.y != other.y) {
-//            return false;
-//        }
-//        return true;
-//    }
-    
-    
+    @Override
+    public String toString() {
+        if (this.pommi == true) {
+            return "*";
+        } else {
+            return "" + ymparoivatMiinatLkm;
+        }
+    }
 }

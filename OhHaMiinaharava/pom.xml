@@ -46,9 +46,11 @@
         <targetClasses>
             <param>Miinaharava.logiikka.Pelilauta*</param>
 	    <param>Miinaharava.logiikka.Ruutu*</param>
+	    <param>Miinaharava.logiikka.Pelilogiikka*</param>
         </targetClasses>
         <targetTests>
-            <param>Miinaharava.logiikka.RuutuTestit*</param>
+            <param>Miinaharava.logiikka.PelilautaTestit*</param>
+            <param>Miinaharava.logiikka.LogiikkaTestit*</param>
         </targetTests>
     </configuration>
 </plugin>

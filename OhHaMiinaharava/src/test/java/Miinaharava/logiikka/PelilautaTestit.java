@@ -20,12 +20,12 @@ import static org.junit.Assert.*;
  *
  * @author Anssi
  */
-public class RuutuTestit {
+public class PelilautaTestit {
 
     Pelilauta lauta;
     Ruutu[][] ruudukko;
 
-    public RuutuTestit() {
+    public PelilautaTestit() {
     }
 
     @BeforeClass
@@ -65,7 +65,7 @@ public class RuutuTestit {
 
         for (int i = 0; i < ruudukko.length; i++) {
             for (int j = 0; j < ruudukko.length; j++) {
-                if (ruudukko[i][j].onkoPommi() == true) {
+                if (ruudukko[i][j].getMiina() == true) {
                     lkm++;
                 }
             }
@@ -79,12 +79,12 @@ public class RuutuTestit {
         poistaPommit(0, 2, ruudukko);
         nollaaLkm(0, 2, ruudukko);
 
-        ruudukko[0][1].setPommi();
-        ruudukko[1][0].setPommi();
-        ruudukko[1][1].setPommi();
+        ruudukko[0][1].setMiina(true);
+        ruudukko[1][0].setMiina(true);
+        ruudukko[1][1].setMiina(true);
 
         Ruutu testattava = ruudukko[0][0];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("3", testattava.toString());
     }
@@ -95,11 +95,11 @@ public class RuutuTestit {
         poistaPommit(0, 2, ruudukko);
         nollaaLkm(0, 2, ruudukko);
 
-        ruudukko[0][1].setPommi();
-        ruudukko[1][1].setPommi();
+        ruudukko[0][1].setMiina(true);
+        ruudukko[1][1].setMiina(true);
 
         Ruutu testattava = ruudukko[0][0];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("2", testattava.toString());
     }
@@ -110,10 +110,10 @@ public class RuutuTestit {
         poistaPommit(0, 2, ruudukko);
         nollaaLkm(0, 2, ruudukko);
 
-        ruudukko[1][0].setPommi();
+        ruudukko[1][0].setMiina(true);
 
         Ruutu testattava = ruudukko[0][0];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("1", testattava.toString());
     }
@@ -124,12 +124,12 @@ public class RuutuTestit {
         poistaPommit(8, 10, ruudukko);
         nollaaLkm(8, 10, ruudukko);
 
-        ruudukko[9][8].setPommi();
-        ruudukko[8][9].setPommi();
-        ruudukko[8][8].setPommi();
+        ruudukko[9][8].setMiina(true);
+        ruudukko[8][9].setMiina(true);
+        ruudukko[8][8].setMiina(true);
 
         Ruutu testattava = ruudukko[9][9];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("3", testattava.toString());
     }
@@ -140,11 +140,11 @@ public class RuutuTestit {
         poistaPommit(8, 10, ruudukko);
         nollaaLkm(8, 10, ruudukko);
 
-        ruudukko[8][9].setPommi();
-        ruudukko[8][8].setPommi();
+        ruudukko[8][9].setMiina(true);
+        ruudukko[8][8].setMiina(true);
 
         Ruutu testattava = ruudukko[9][9];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("2", testattava.toString());
     }
@@ -154,10 +154,10 @@ public class RuutuTestit {
 
         poistaPommit(8, 10, ruudukko);
         nollaaLkm(8, 10, ruudukko);
-        ruudukko[9][8].setPommi();
+        ruudukko[9][8].setMiina(true);
 
         Ruutu testattava = ruudukko[9][9];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("1", testattava.toString());
     }
@@ -170,8 +170,8 @@ public class RuutuTestit {
         setPommit(4, 7, ruudukko);
 
         Ruutu testattava = ruudukko[5][5];
-        testattava.poistaPommi();
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setMiina(false);
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("8", testattava.toString());
     }
@@ -183,7 +183,7 @@ public class RuutuTestit {
         nollaaLkm(4, 7, ruudukko);
 
         Ruutu testattava = ruudukko[5][5];
-        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatPommit(testattava));
+        testattava.setYmparoivienLkm(lauta.haravoiYmparoivatMiinat(testattava));
 
         assertEquals("0", testattava.toString());
     }
@@ -191,7 +191,7 @@ public class RuutuTestit {
     private Ruutu[][] poistaPommit(int alaraja, int ylaraja, Ruutu[][] ruudukko) {
         for (int i = alaraja; i < ylaraja; i++) {
             for (int j = alaraja; j < ylaraja; j++) {
-                ruudukko[i][j].poistaPommi();
+                ruudukko[i][j].setMiina(false);
             }
         }
         return ruudukko;
@@ -200,7 +200,7 @@ public class RuutuTestit {
     private Ruutu[][] setPommit(int alaraja, int ylaraja, Ruutu[][] ruudukko) {
         for (int i = alaraja; i < ylaraja; i++) {
             for (int j = alaraja; j < ylaraja; j++) {
-                ruudukko[i][j].setPommi();
+                ruudukko[i][j].setMiina(true);
             }
         }
         return ruudukko;
