@@ -151,5 +151,15 @@ public class LogiikkaTestit {
         logiikkaMiinaton.avaaRuutu(ruudutMiinaton[3][3]);
         assertEquals(false, ruudutMiinaton[4][3].getAvattu());
     }
+    
+    @Test
+    public void peliVoitettu () {
+        this.ruudutMiinaton[0][0].setMiina(true);
+        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[0][1]);
+        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[1][1]);
+        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[1][0]);
+        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[2][1]);
+        assertEquals(true, logiikkaMiinaton.peliVoitettu());
 
+    }
 }
