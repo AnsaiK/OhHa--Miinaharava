@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Miinaharava.logiikka;
 
 /**
+ * Pelin yksittäiset ruudut. Määrittelee ruutujen tilan.
  *
- * @author Anssi
  */
 public class Ruutu {
 
@@ -61,6 +57,12 @@ public class Ruutu {
         return this.avattu;
     }
 
+    /**
+     * Metodi asettaa ympäroivien miinojen lukumäärän. Jos ruudussa on pommi, se
+     * saa arvoksi 99.
+     *
+     * @param lkm miinojen määrä
+     */
     public void setYmparoivienLkm(int lkm) {
         if (pommi == true) {
             this.ymparoivatMiinatLkm = 99; // pommi
@@ -69,6 +71,10 @@ public class Ruutu {
         }
     }
 
+    /**
+     * Testikäyttöön tekstipohjaista pelilautaa varten.
+     *
+     */
     @Override
     public String toString() {
         if (this.pommi == true) {

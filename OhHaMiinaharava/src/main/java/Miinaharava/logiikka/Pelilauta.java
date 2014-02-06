@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Miinaharava.logiikka;
 
 import java.util.Random;
 
+/**
+ * Luokka sisältää Pelikentän muodostamiseen tarvittavat toiminnot.
+ *
+ */
 public class Pelilauta {
 
     private int miinojenLkm;
     private Ruutu[][] ruudut;
     Random random;
     private int kentanKoko;
-    
-   
+
     public Pelilauta(int leveys, int miinojenLkm) {
         this.kentanKoko = leveys;
         this.miinojenLkm = miinojenLkm;
@@ -26,6 +23,10 @@ public class Pelilauta {
         laskeRuutujenYmparoivatMiinat();
     }
 
+    /**
+     * Luo laudan ruudut kentän koon mukaan.
+     *
+     */
     private void luoLaudanRuudut() {
         for (int x = 0; x < kentanKoko; x++) {
             for (int y = 0; y < kentanKoko; y++) {
@@ -41,11 +42,15 @@ public class Pelilauta {
     public int getKentanKoko() {
         return this.kentanKoko;
     }
-    
-    public int getMiinojenlkm () {
+
+    public int getMiinojenlkm() {
         return this.miinojenLkm;
     }
 
+    /**
+     * Asettaa miinojen lukumäärän verran miinoja satunnaisiin ruutuihin.
+     *
+     */
     public void arvoMiinat() {
         int pommitJaljella = this.miinojenLkm;
 
@@ -60,6 +65,9 @@ public class Pelilauta {
         }
     }
 
+    /**
+     * Testausta varten
+     */
     public void PiirraTekstiLauta() {   // testaukseen
         String lauta = "";
 
@@ -73,7 +81,11 @@ public class Pelilauta {
         }
         System.out.println(lauta);
     }
-    
+
+    /**
+     * Metodi käy läpi kentän ruudut. Asettaa jokaiselle ruudulle ympäroivien
+     * miinojen lukumääräksi haravoiYmparoivatMiinat -metodilta saamansa arvon.
+     */
     public void laskeRuutujenYmparoivatMiinat() {
         for (int x = 0; x < kentanKoko; x++) {
             for (int y = 0; y < ruudut.length; y++) {
@@ -82,6 +94,12 @@ public class Pelilauta {
         }
     }
 
+    /**
+     * Käy läpi ympäröivissä ruuduissa olevat miinat.
+     *
+     * @param ruutu Metodi saa parametriksi Ruutu-olion.
+     * @return palauttaa ympäröivien miinojen määrän.
+     */
     public int haravoiYmparoivatMiinat(Ruutu ruutu) {
 
         int miinojenMaara = 0;
@@ -108,7 +126,7 @@ public class Pelilauta {
                 }
             }
         }
-             
+
         return miinojenMaara;
     }
 }
