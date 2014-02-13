@@ -53,13 +53,16 @@ public class LogiikkaTestit {
     }
 
     @Test
-    public void liputaRuutu() {
-
-        ruudut[1][1].setLippu(true);
-        ruudut[1][1].setLippu(false);
-        ruudut[1][1].setLippu(true);
+    public void liputaRuutuTrue() {
+        logiikka.liputaRuutu(ruudut[1][1]);
         assertEquals(true, ruudut[1][1].getLippu());
+    }
 
+    @Test
+    public void liputaRuutuFalse() {
+        logiikka.liputaRuutu(ruudut[1][1]);
+        logiikka.liputaRuutu(ruudut[1][1]);
+        assertEquals(false, ruudut[1][1].getLippu());
     }
 
     @Test
@@ -119,6 +122,13 @@ public class LogiikkaTestit {
     }
 
     @Test
+    public void uusiPeliAvaamattomatRuudutOk() {
+        logiikka.avaaKenttaa(ruudut[1][1]);
+        logiikka.uusiPeli();
+        assertEquals(90, logiikka.getAvaamattomatRuudut());
+    }
+
+    @Test
     public void avaaKenttaaTyhjatAuki() {
         int avattu = 0;
         logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[2][2]);
@@ -151,15 +161,16 @@ public class LogiikkaTestit {
         logiikkaMiinaton.avaaRuutu(ruudutMiinaton[3][3]);
         assertEquals(false, ruudutMiinaton[4][3].getAvattu());
     }
-    
-    @Test
-    public void peliVoitettu () {
-        this.ruudutMiinaton[0][0].setMiina(true);
-        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[0][1]);
-        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[1][1]);
-        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[1][0]);
-        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[2][1]);
-        assertEquals(true, logiikkaMiinaton.peliVoitettu());
 
+    @Test
+    public void peliVoitettu() {
+        logiikkaMiinaton.avaaKenttaa(ruudutMiinaton[2][1]);
+        assertEquals(true, logiikkaMiinaton.getPeliVoitettu());
+    }
+
+    @Test
+    public void peliVoitettuFalse() {
+        logiikka.avaaKenttaa(ruudutMiinaton[2][1]);
+        assertEquals(false, logiikka.getPeliVoitettu());
     }
 }
