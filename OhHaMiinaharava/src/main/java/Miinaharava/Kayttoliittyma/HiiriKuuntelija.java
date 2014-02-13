@@ -7,7 +7,6 @@ package Miinaharava.Kayttoliittyma;
 
 import Miinaharava.logiikka.Pelilogiikka;
 import Miinaharava.logiikka.Ruutu;
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -19,13 +18,13 @@ import javax.swing.JButton;
 public class HiiriKuuntelija implements MouseListener {
 
     private Pelilogiikka logiikka;
-    private Kayttoliittyma UI;
+    private Kayttoliittyma gui;
     private Ruutu ruutu;
     private JButton nappi;
 
     public HiiriKuuntelija(Pelilogiikka logiikka, Kayttoliittyma UI, Ruutu ruutu, JButton ruutuNappi) {
         this.logiikka = logiikka;
-        this.UI = UI;
+        this.gui = UI;
         this.ruutu = ruutu;
         this.nappi = ruutuNappi;
     }
@@ -33,12 +32,23 @@ public class HiiriKuuntelija implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            this.logiikka.avaaKenttaa(ruutu);
-            this.nappi.setBackground(Color.red);
-            this.nappi.setForeground(Color.red);
+            if (logiikka.getPeliVoitettu()== false) {
+                this.logiikka.avaaKenttaa(ruutu);
+                this.gui.paivitaRuudut();
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON3) {
-            this.logiikka.liputaRuutu(ruutu);
+            if (logiikka.getPeliVoitettu()== false) {
+                if (ruutu.getAvattu() == false) {
+                    this.logiikka.liputaRuutu(ruutu);
+                }
+                if (ruutu.getLippu() == true) {
+                    this.nappi.setText("?");
+                } else {
+                    this.nappi.setText("");
+                }
+            }
+
         }
     }
 

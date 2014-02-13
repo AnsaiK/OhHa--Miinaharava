@@ -68,19 +68,19 @@ public class Pelilauta {
     /**
      * Testausta varten
      */
-    public void PiirraTekstiLauta() {   // testaukseen
-        String lauta = "";
-
-        for (int i = 0; i < kentanKoko; i++) {
-            if (i > 0) {
-                lauta += "\n";
-            }
-            for (int j = 0; j < kentanKoko; j++) {
-                lauta += this.ruudut[i][j].toString() + " ";
-            }
-        }
-        System.out.println(lauta);
-    }
+//    public void PiirraTekstiLauta() {   // testaukseen
+//        String lauta = "";
+//
+//        for (int i = 0; i < kentanKoko; i++) {
+//            if (i > 0) {
+//                lauta += "\n";
+//            }
+//            for (int j = 0; j < kentanKoko; j++) {
+//                lauta += this.ruudut[i][j].toString() + " ";
+//            }
+//        }
+//        System.out.println(lauta);
+//    }
 
     /**
      * Metodi käy läpi kentän ruudut. Asettaa jokaiselle ruudulle ympäroivien

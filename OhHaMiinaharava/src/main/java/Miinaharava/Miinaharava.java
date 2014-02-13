@@ -9,10 +9,8 @@ public class Miinaharava {
 
     public static void main(String[] args) {
 
-        Pelilogiikka logi = new Pelilogiikka(10, 10);
-        Kayttoliittyma kali = new Kayttoliittyma(logi);
+        Kayttoliittyma kali = new Kayttoliittyma();
         kali.run();
 
-//        lauta.PiirraTekstiLauta(); // testausta varten
     }
 }

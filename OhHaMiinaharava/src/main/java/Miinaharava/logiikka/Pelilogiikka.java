@@ -9,11 +9,23 @@ public class Pelilogiikka {
     private Pelilauta lauta;
     private Ruutu[][] ruudut;
     private int ruutujaKiinni;
+    private int avaamattomiaRuutujaJäljellä;
+    private Boolean peliVoitettu;
+    private Boolean peliHavitty;
 
+    /**
+     * Alustaa pelin. Konstruktori luo pelilaudan
+     *
+     * @param koko pelilaudan koko
+     * @param miinat miinojen määrä
+     */
     public Pelilogiikka(int koko, int miinat) {
         this.lauta = new Pelilauta(koko, miinat);
         this.ruudut = lauta.getRuudut();
         this.ruutujaKiinni = ruudut.length * ruudut.length;
+        this.peliVoitettu = false;
+        this.peliHavitty = false;
+        this.avaamattomiaRuutujaJäljellä = this.ruutujaKiinni - lauta.getMiinojenlkm();
     }
 
     /**
@@ -28,9 +40,12 @@ public class Pelilogiikka {
             ruutu.setLippu(false);
         }
     }
-
+    
     /**
-     * Nollaa kentän alkutilanteeseen uuta peliä varten.
+     * Nollaa kentän alkutilanteeseen uutta peliä varten. Asettaa ruutujen
+     * boolean-arvot falseksi, nollaa pelin hävitty- ja voitettu tilan. Lisäksi
+     * arvotaan miinat, lasketaan ruutuja ympäröivät miinat ja merkataan kiinni
+     * olevien ruutujen määrä.
      *
      */
     public void uusiPeli() {
@@ -41,22 +56,40 @@ public class Pelilogiikka {
                 ruudut[i][j].setMiina(false);
             }
         }
+        this.peliHavitty = false;
+        this.peliVoitettu = false;
         lauta.arvoMiinat();
         lauta.laskeRuutujenYmparoivatMiinat();
         this.ruutujaKiinni = ruudut.length * ruudut.length;
+        this.avaamattomiaRuutujaJäljellä = this.ruutujaKiinni - lauta.getMiinojenlkm();
     }
 
     /**
      * Tarkistaa onko peli pelattu läpi.
      *
-     * @return Palautta true, jos kaikki miinattomat ruudut ovat auki.
+     * @return asettaa peliVoitettu-arvoksi true, jos kaikki miinattomat ruudut
+     * ovat auki.
      */
-    public boolean peliVoitettu() {
-        if (this.ruutujaKiinni == lauta.getMiinojenlkm()) {
-            return true;
-        } else {
-            return false;
+    private void onkoPeliVoitettu() {
+        if (this.avaamattomiaRuutujaJäljellä == 0) {
+            this.peliVoitettu = true;
         }
+    }
+
+    public boolean getPeliVoitettu() {
+        return this.peliVoitettu;
+    }
+
+    public boolean getPeliHavitty() {
+        return this.peliHavitty;
+    }
+
+    public void setPeliHavitty(boolean havitty) {
+        this.peliHavitty = havitty;
+    }
+
+    public int getAvaamattomatRuudut() {
+        return this.avaamattomiaRuutujaJäljellä;
     }
 
     /**
@@ -69,9 +102,10 @@ public class Pelilogiikka {
      */
     public void avaaKenttaa(Ruutu ruutu) {
 
+        int kentankoko = lauta.getKentanKoko();
+
         int x = ruutu.getX();
         int y = ruutu.getY();
-        int kentankoko = lauta.getKentanKoko();
 
         if (ruutu.getAvattu() == true) {
             return;
@@ -92,13 +126,21 @@ public class Pelilogiikka {
 
     /**
      * Merkkaa ruudun avatuksi ja vähentää kiinni olevien ruutujen määrää
-     * yhdellä.
+     * yhdellä. Tarkistaa onko ruudussa miina. Jos ruudussa ei ole miinaa,
+     * vähennettään yksi miinattomiaRuutujaAvaamatta -arvosta. Lopuksi
+     * tarkistetaan onko peli voitettu kutsumalla onkoPeliVoitettu -metodia.
      *
+     * @param ruutu avaa parametrinä olevan ruudun.
      *
      */
     public void avaaRuutu(Ruutu ruutu) {
         ruutu.setAvattu(true);
         this.ruutujaKiinni--;
+        if (ruutu.getMiina() == false) {
+            this.avaamattomiaRuutujaJäljellä--;
+            onkoPeliVoitettu();
+        }
+
     }
 
     public Pelilauta getPelilauta() {
