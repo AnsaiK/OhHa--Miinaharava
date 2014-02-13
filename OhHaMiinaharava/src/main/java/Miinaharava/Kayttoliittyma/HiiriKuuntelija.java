@@ -13,7 +13,7 @@ import javax.swing.JButton;
 
 /**
  *
- * Hiiren vasemman ja oikean napin kuuntelija. Vielä kesken.
+ * Hiiren vasemman ja oikean napin kuuntelija. 
  */
 public class HiiriKuuntelija implements MouseListener {
 
