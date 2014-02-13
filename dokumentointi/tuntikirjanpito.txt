@@ -11,3 +11,5 @@ Tuntikirjanpito:
 30.1.	1h 	palautus 3
 5.2.	1h	grafiikan ihmettelyä
 6.2.	6h	Sekvenssikaaviot, git-säätöä, koodin viilausta
+10.2.	1h 	Käyttöliittymän koodailua
+13.2.	7h	Käyttöliittymän koodausta ja yleistä tyhjäkäyntiä
