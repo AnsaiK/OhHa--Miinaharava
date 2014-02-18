@@ -35,13 +35,19 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
     private JLabel tekstiKentta;
     private JLabel ruutujaAvaamatta;
     private JPanel pelialue;
-    private int koko;
+    private JPanel ylarivi;
+    private JPanel tekstikentta;
+    private int ruutujaPerSivu;
     private int miinat;
+    private int alustanLeveys;
+    private int alustanKorkeus;
 
     public Kayttoliittyma() {
-        this.koko = 10;
+        this.ruutujaPerSivu = 10;
         this.miinat = 10;
-        this.logiikka = new Pelilogiikka(koko, miinat);
+        this.alustanLeveys = 300;
+        this.alustanKorkeus = 350;
+        this.logiikka = new Pelilogiikka(ruutujaPerSivu, miinat);
         this.lauta = logiikka.getPelilauta();
         this.kaikkiRuudut = new HashMap();
 
@@ -51,10 +57,10 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
 
         frame = new JFrame("Miinaharava");
 
-        frame.setPreferredSize(new Dimension(300, 350));
+        frame.setPreferredSize(new Dimension(this.alustanLeveys, this.alustanKorkeus));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        luoKomponentit(frame.getContentPane(), this.koko, this.miinat);
+        luoKomponentit(frame.getContentPane(), this.ruutujaPerSivu, this.miinat);
 
         frame.pack();
         frame.setVisible(true);
@@ -70,16 +76,16 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
         this.logiikka = new Pelilogiikka(koko, miinat);
         this.lauta = logiikka.getPelilauta();
         JMenuBar valikko = luoValikko();
-        JPanel ylarivi = luoYlaRivi();
-        JPanel pelialue = luoPelialue();
-        JPanel tekstikenttaAla = luoAlaKentta();
+        ylarivi = luoYlaRivi();
+        pelialue = luoPelialue();
+        tekstikentta = luoAlaKentta();
 
         container.setLayout(new BorderLayout());
 
         frame.setJMenuBar(valikko);
         container.add(ylarivi, BorderLayout.NORTH);
         container.add(pelialue, BorderLayout.CENTER);
-        container.add(tekstikenttaAla, BorderLayout.SOUTH);
+        container.add(tekstikentta, BorderLayout.SOUTH);
     }
 
     /**
@@ -88,6 +94,7 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
      */
     private JMenuBar luoValikko() {
         JMenuBar menubar = new JMenuBar();
+
         JMenu vaikeusaste = new JMenu("Vaikeusaste");
         JMenuItem helppo = new JMenuItem("Helppo");
         JMenuItem normaali = new JMenuItem("Normaali");
@@ -95,21 +102,42 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
 
         JMenuItem lopetus = new JMenuItem("Lopetus");
 
-//        helppo.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
-//        normaali.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
-//        vaikea.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
+        helppo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ruutujaPerSivu = 10;
+                miinat = 10;
+                alustanLeveys = 30 * ruutujaPerSivu;
+                alustanKorkeus = alustanLeveys + 50;
+                frame.remove(tekstiKentta);
+
+                uusiPeli();
+            }
+        });
+        normaali.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ruutujaPerSivu = 16;
+                miinat = 25;
+                alustanLeveys = 30 * ruutujaPerSivu;
+                alustanKorkeus = alustanLeveys + 50;
+                frame.remove(tekstiKentta);
+                uusiPeli();
+
+            }
+        });
+        vaikea.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ruutujaPerSivu = 20;
+                miinat = 40;
+                alustanLeveys = 30 * ruutujaPerSivu;
+                alustanKorkeus = alustanLeveys + 50;
+                frame.remove(tekstiKentta);
+                uusiPeli();
+
+            }
+        });
         lopetus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,7 +149,6 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
         vaikeusaste.add(helppo);
         vaikeusaste.add(normaali);
         vaikeusaste.add(vaikea);
-
         menubar.add(lopetus);
 
         return menubar;
@@ -136,7 +163,7 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
         JPanel ylarivi = new JPanel(new GridLayout(1, 3));
 
         JButton uusiPeli = new JButton("Uusi peli");
-        uusiPeli.setPreferredSize(new Dimension(30, 30));
+        uusiPeli.setPreferredSize(new Dimension(this.alustanLeveys / 2, 30));
         uusiPeli.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,7 +173,7 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
         ylarivi.add(uusiPeli);
 
         ruutujaAvaamatta = new JLabel(" Ruutuja avaamatta: " + logiikka.getAvaamattomatRuudut());
-        ruutujaAvaamatta.setPreferredSize(new Dimension(30, 30));
+        ruutujaAvaamatta.setPreferredSize(new Dimension(this.alustanLeveys / 2, 30));
         ylarivi.add(ruutujaAvaamatta);
 
         return ylarivi;
@@ -174,8 +201,6 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
                 ruudunNappi.setFont(ruudunfontti);
 
                 panel.add(ruudunNappi);
-                
-                
 
                 HiiriKuuntelija kuuntelija = new HiiriKuuntelija(this.logiikka, this, ruudut[x][y], ruudunNappi);
                 ruudunNappi.addMouseListener(kuuntelija);
@@ -189,11 +214,11 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
      *
      */
     private JPanel luoAlaKentta() {
-        JPanel alaKentta = new JPanel();
-        alaKentta.setPreferredSize(new Dimension(300, 30));
+        tekstikentta = new JPanel();
+        tekstikentta.setPreferredSize(new Dimension(this.alustanLeveys, 30));
         tekstiKentta = new JLabel("Etsi miinat!");
-        alaKentta.add(tekstiKentta);
-        return alaKentta;
+        tekstikentta.add(tekstiKentta);
+        return tekstikentta;
     }
 
     /**
@@ -202,29 +227,26 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
      */
     public void paivitaRuudut() {
         for (Ruutu ruutu : kaikkiRuudut.keySet()) {
+            JButton paivitettava = kaikkiRuudut.get(ruutu);
+
             if (logiikka.getPeliHavitty() == false) {
                 if (ruutu.getAvattu() && ruutu.getYmparoivatMiinatLkm() == 1) {
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
                     paivitettava.setText("1");
                     paivitettava.setForeground(Color.BLUE);
                 }
                 if (ruutu.getAvattu() && ruutu.getYmparoivatMiinatLkm() == 2) {
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
                     paivitettava.setText("2");
-                    paivitettava.setForeground(new Color(40,100,0));
+                    paivitettava.setForeground(new Color(70, 110, 0));
                 }
                 if (ruutu.getAvattu() && ruutu.getYmparoivatMiinatLkm() == 3) {
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
                     paivitettava.setText("3");
                     paivitettava.setForeground(Color.red);
                 }
                 if (ruutu.getAvattu() && ruutu.getYmparoivatMiinatLkm() == 4) {
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
                     paivitettava.setText("4");
                     paivitettava.setForeground(Color.magenta);
                 }
                 if (ruutu.getAvattu() && ruutu.getYmparoivatMiinatLkm() == 5) {
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
                     paivitettava.setText("5");
                     paivitettava.setForeground(Color.PINK);
                 }
@@ -232,18 +254,10 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
                     tekstiKentta.setText("Löysit kaikki miinat, voitit!");
                 }
                 if (ruutu.getAvattu() && ruutu.getMiina()) {
-                    Font fontti = new Font("LATIN", Font.BOLD, 20);
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
-                    paivitettava.setForeground(Color.BLACK);
-                    paivitettava.setText("M");
-                    paivitettava.setFont(fontti);
-                    tekstiKentta.setFont(fontti);
-                    tekstiKentta.setForeground(Color.red);
-                    tekstiKentta.setText("Osuit miinaan, hävisit!");
-                    logiikka.setPeliHavitty(true);
+                    paivitettava.setForeground(Color.RED);
+                    peliHavitty();
                 }
                 if (ruutu.getAvattu() && ruutu.getYmparoivatMiinatLkm() == 0) {
-                    JButton paivitettava = kaikkiRuudut.get(ruutu);
                     paivitettava.setBorder(null);
                     paivitettava.setText("");
                 }
@@ -253,14 +267,38 @@ public class Kayttoliittyma extends JFrame implements Runnable, ActionListener {
     }
 
     /**
+     * Näyttää kaikki miinat ja päivittää tekstikentän.
+     *
+     */
+    public void peliHavitty() {
+        Font fontti = new Font("LATIN", Font.BOLD, 20);
+
+        for (Ruutu ruutu : kaikkiRuudut.keySet()) {
+            JButton paivitettava = kaikkiRuudut.get(ruutu);
+            if (ruutu.getMiina()) {
+                paivitettava.setText("M");
+                paivitettava.setFont(fontti);
+            }
+        }
+        tekstiKentta.setFont(fontti);
+        tekstiKentta.setForeground(Color.red);
+        tekstiKentta.setText("Osuit miinaan, hävisit!");
+        logiikka.setPeliHavitty(true);
+    }
+
+    /**
      * Luo uuden pelin. Nollaa pelilogiikan parametrit alkutilanteeseen ja
      * alustaa uuden pelin.
      *
      */
     public void uusiPeli() {
         logiikka.uusiPeli();
+        frame.remove(tekstiKentta);
         frame.remove(pelialue);
-        luoKomponentit(frame.getContentPane(), koko, miinat);
+        frame.remove(ylarivi);
+        frame.setPreferredSize(new Dimension(this.alustanLeveys, this.alustanKorkeus));
+        frame.pack();
+        luoKomponentit(frame.getContentPane(), ruutujaPerSivu, miinat);
         frame.validate();
     }
 
