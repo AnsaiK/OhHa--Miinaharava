@@ -40,7 +40,7 @@ public class Pelilogiikka {
             ruutu.setLippu(false);
         }
     }
-    
+
     /**
      * Nollaa kentän alkutilanteeseen uutta peliä varten. Asettaa ruutujen
      * boolean-arvot falseksi, nollaa pelin hävitty- ja voitettu tilan. Lisäksi
@@ -115,7 +115,9 @@ public class Pelilogiikka {
         if (ruutu.getYmparoivatMiinatLkm() > 0) {
             return;
         }
-        for (int i = -1; i < 2; i++) {
+
+                for (int i = -1;
+                i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if (x + i >= 0 && y + j >= 0 && x + i < kentankoko && y + j < kentankoko) {
                     avaaKenttaa(ruudut[x + i][y + j]);
@@ -123,7 +125,7 @@ public class Pelilogiikka {
             }
         }
     }
-
+    
     /**
      * Merkkaa ruudun avatuksi ja vähentää kiinni olevien ruutujen määrää
      * yhdellä. Tarkistaa onko ruudussa miina. Jos ruudussa ei ole miinaa,
@@ -140,7 +142,6 @@ public class Pelilogiikka {
             this.avaamattomiaRuutujaJäljellä--;
             onkoPeliVoitettu();
         }
-
     }
 
     public Pelilauta getPelilauta() {
