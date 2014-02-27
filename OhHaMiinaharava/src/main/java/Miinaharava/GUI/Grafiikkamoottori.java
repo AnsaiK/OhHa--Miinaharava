@@ -29,7 +29,7 @@ public class Grafiikkamoottori {
     public Grafiikkamoottori(Kayttoliittyma kali) {
         this.UI = kali;
         this.koko = 10;
-        this.miinat = 4;
+        this.miinat = 10;
         this.logiikka = new Pelilogiikka(koko, miinat);
         this.lauta = logiikka.getPelilauta();
         this.kaikkiRuudut = new HashMap();
