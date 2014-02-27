@@ -1,1 +1,17 @@
 käyttöohjeet:
+Miinaharavassa käytössä on pelilauta, jonka kaikki ruudut ovat alussa paljastamattomia. Laudalla on piilossa miinoja, joiden paikat tulee löytää. Peli on läpi kun kaikki miinattomat ruudut on auki. Peli päättyy ennenaikaisesti, jos avaa miinan sisältävän ruudun. 
+
+Peliä pelataan hiirellä. Vasemmalla hiirennapilla avataan ruutuja. Oikealla hiirennapilla voi merkitä ruudun tai ruudun ollessa merkitty poistaa merkinnän. Merkinnän symbolina on ?.
+
+Pelaaja klikkaa hiiren vasemmalla näppäimellä paljastamattomia ruutuja: jos ruudussa on miina, se räjähtää ja peli päättyy. Jos ruudussa ei ole miinaa, ruudussa näkyy, monessako ympäröivässä ruudussa on miina.
+Mikäli klikatun ruudun yhdessäkään naapuriruudussa ei ole miinaa, peli paljastaa ensin kaikki siihen yhteydessä olevat ruudut, joiden naapurissa ei myöskään ole miinaa, sekä lisäksi tämän paljastetun alueen reunalla olevat ruudut, joiden naapurissa on miina. Voitetun pelin merkiksi miinojen kohdalle tulee v voiton merkiksi. Hävityn pelin tapauksessa kaikki miinat paljastuvat ja avattu miinaruutu muuttuu punaiseksi.
+
+Pelissä on kolme vaikeustasoa:
+helpolla vaikeustasolla laudan koko on 10 x 10 ruutua ja miinoja on 10.
+keskivaikealla vaikeustasolla laudan koko on 16 x 16 ruutua ja miinoja on 40.
+vaikealla vaikeustasolla laudan koko on 20 x 20 ruutua ja miinoja on 80.
+
+Pelin vasemmassa yläreunassa näkyy pelin alkamisesta kulunut aika. Oikealla yläreunassa on jäljellä olevien avaamattomien ruutujen määrä.
+
+
+
