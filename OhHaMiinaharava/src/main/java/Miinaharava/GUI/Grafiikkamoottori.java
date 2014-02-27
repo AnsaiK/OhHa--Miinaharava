@@ -1,5 +1,7 @@
 package Miinaharava.GUI;
 
+import Miinaharava.HighScore.Tulos;
+import Miinaharava.HighScore.TulosTaulu;
 import Miinaharava.logiikka.Pelilauta;
 import Miinaharava.logiikka.Pelilogiikka;
 import Miinaharava.logiikka.Ruutu;
@@ -20,20 +22,24 @@ public class Grafiikkamoottori {
     private Pelilauta lauta;
     private Pelilogiikka logiikka;
     private Kayttoliittyma UI;
+    private TulosTaulu tulostaulu;
     private JPanel pelialue;
     private Map<Ruutu, JButton> kaikkiRuudut;
     private int PainallusLkm;
     private int miinat;
     private int koko;
+    private String vaikeustaso;
 
     public Grafiikkamoottori(Kayttoliittyma kali) {
         this.UI = kali;
-        this.koko = 10;
-        this.miinat = 10;
+        this.koko = 9;
+        this.miinat = 9;
         this.logiikka = new Pelilogiikka(koko, miinat);
         this.lauta = logiikka.getPelilauta();
         this.kaikkiRuudut = new HashMap();
         this.PainallusLkm = 0;
+        this.vaikeustaso = "helppo";
+        this.tulostaulu = new TulosTaulu(this.vaikeustaso);
     }
 
     /**
@@ -80,13 +86,11 @@ public class Grafiikkamoottori {
                     paivitettava.setBackground(Color.GRAY);
                     paivitettava.setBorder(null);
                     paivitettava.setText("");
-
-                    UI.getYlaPaneeli().getRuutujaAvaamatta().setText("Avaamatta: " + this.logiikka.getAvaamattomatRuudut());
                 }
+                UI.getYlaPaneeli().getRuutujaAvaamatta().setText("Avaamatta: " + this.logiikka.getAvaamattomatRuudut());
             }
         }
-        if (this.logiikka.getPeliVoitettu()
-                == true) {
+        if (this.logiikka.getPeliVoitettu()) {
             peliVoitettu();
         }
     }
@@ -94,14 +98,14 @@ public class Grafiikkamoottori {
     /**
      *
      * Nollaa pelitilanteen uutta peliä varten. Kutsuu logiikkaluokan metodia
-     * uusiPeli(). Palauttaa uuden pelilaudan ja nollaa hiirennapin painallusten määrän.
+     * uusiPeli(). Palauttaa uuden pelilaudan ja nollaa hiirennapin painallusten
+     * määrän.
      */
     public void uusiPeli() {
         this.logiikka.uusiPeli();
         this.logiikka = new Pelilogiikka(koko, miinat);
         this.lauta = logiikka.getPelilauta();
         this.PainallusLkm = 0;
-
     }
 
     /**
@@ -160,12 +164,21 @@ public class Grafiikkamoottori {
 
     /**
      *
-     * Päivittää pelin tilanteen voitoksi.
+     * Päivittää pelin tilanteen voitoksi. Kutsuu metodia lisaaTulos().
      */
     private void peliVoitettu() {
         UI.getYlaPaneeli().pysaytaKello();
         paivitaMiinat("V");
         paivitaAlakentta("Löysit kaikki miinat, voitit!");
+        lisaaTulos();
+    }
+
+    /**
+     *
+     * Lisää tuloksen tulostauluun.
+     */
+    private void lisaaTulos() {
+        this.tulostaulu.lisaaTulos(new Tulos(UI.getYlaPaneeli().getAika(), this.PainallusLkm));
     }
 
     /**
@@ -176,7 +189,6 @@ public class Grafiikkamoottori {
      */
     private void paivitaMiinat(String teksti) {
         Font fontti = new Font("LATIN", Font.BOLD, 10);
-
         for (Ruutu ruutu : kaikkiRuudut.keySet()) {
             JButton paivitettava = kaikkiRuudut.get(ruutu);
             if (ruutu.getMiina()) {
@@ -196,6 +208,21 @@ public class Grafiikkamoottori {
         UI.getAlapaneeli().getPelitilanneTekstikentta().setText(teksti);
     }
 
+    /**
+     *
+     * Asettaa vaikeustason oikeaa tulostaulua varten.
+     *
+     * @param vaikeustaso Vaikeustason kuvaus tulostaulua varten.
+     */
+    public void setVaikeustaso(String vaikeustaso) {
+        this.vaikeustaso = vaikeustaso;
+        this.tulostaulu = new TulosTaulu(this.vaikeustaso);
+    }
+
+    public TulosTaulu getTulostaulu() {
+        return tulostaulu;
+    }
+
     public void setMiinat(int miinat) {
         this.miinat = miinat;
     }
@@ -207,4 +234,5 @@ public class Grafiikkamoottori {
     public Pelilogiikka getLogiikka() {
         return logiikka;
     }
+
 }

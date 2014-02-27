@@ -10,12 +10,12 @@ Pelin toiminnot:
 - Uusi peli
 - Lopetus
 - kolme eri vaikeusasteen valintaa
+- Tuloslista
 
 
 
 Pelin rakenne:
-Ohjelma on jaettu logiikan ja käyttöliittymän osalta omiin paketteihin. Logiikka-luokissa on pelin ydintoiminnat. Graafinen käyttöliittymä kokoaa logiikan toiminnot graafiseen muotoon.
-
+Ohjelma on jaettu logiikan ja käyttöliittymän osalta omiin paketteihin. Logiikka-luokissa on pelin ydintoiminnat. Graafinen käyttöliittymä kokoaa logiikan toiminnot graafiseen muotoon. HighScore-paketissa on Tulos-, ja TulosTaulu-luokat. 
 Logiikka:
 Logiikkapaketit pitää sisällään pelin toiminnan kannalta oleellisen logiikan.
 
@@ -35,3 +35,7 @@ Yläpaneelissa on peliin kulunut aika, uuden pelin valintanappi ja avaamattomien
 - Grafiikkamoottori-luokka toimii pelin logiikan ja käyttöliittymän elementtien välissä. Luokka päivittää graafisia elementtejä ja pelilogiikka-luokkaa pelin edetessä. Grafiikkamoottori ei tunne muita graafiseen käyttöliittymään liittyviä luokkia, kuin itse käyttöliittymän.
 
 - HiiriKuuntelija välittää hiirenpainallukset grafiikkamoottori-luokalle, joka päivittää pelitilannetta painallusten mukaan.
+
+HighScore:
+- Tulosluokka pitää sisällään yksittäisen tuloksen tiedot.
+- TulosTaulu-luokka hallinnoi pelin tuloksia ArrayListin avulla. ArrayList tallennetaan ja luetaan tiedostosta.

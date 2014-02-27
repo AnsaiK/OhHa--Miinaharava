@@ -70,7 +70,7 @@ public class YlaosaPaneeli {
      *
      */
     private void ruutujaAvaamattaKentta() {
-        ruutujaAvaamattaKentta = new JLabel("Ruutuja avaamatta: ", JLabel.CENTER);
+        ruutujaAvaamattaKentta = new JLabel("Avaamatta: " , JLabel.CENTER);
         ruutujaAvaamattaKentta.setPreferredSize(new Dimension(this.alustanLeveys / 3, 30));
         ruutujaAvaamattaKentta.setBorder(reunat);
         ylarivi.add(ruutujaAvaamattaKentta);

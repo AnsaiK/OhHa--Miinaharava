@@ -14,3 +14,6 @@ Tuntikirjanpito:
 10.2.	1h 	Käyttöliittymän koodailua
 13.2.	7h	Käyttöliittymän koodausta ja yleistä tyhjäkäyntiä
 14.2.	2h	Graafisen käyttöliittymän muutoksia	
+26.2.	6h	Graafisen käyttöliittymän fiksailua ja HighScoren aloittelu
+27.2.	3h	Graafisen käyttöliitymän fiksailua (ei siis ole kovin hyvin hallussa..)
+28.2.	4h	HighScoren kanssa tappelua.

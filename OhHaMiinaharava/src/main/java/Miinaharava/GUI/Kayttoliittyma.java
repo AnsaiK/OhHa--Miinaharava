@@ -27,12 +27,15 @@ public class Kayttoliittyma extends JFrame implements Runnable {
     private int alustanKorkeus;
 
     public Kayttoliittyma() {
-        this.alustanLeveys = 500;
-        this.alustanKorkeus = 570;
+        this.alustanLeveys = 450;
+        this.alustanKorkeus = 500;
         this.gMoottori = new Grafiikkamoottori(this);
-
     }
 
+    /**
+     * Luo framen ja kutsuu luoKomponentit()-metodia.
+     *
+     */
     public void run() {
         frame = new JFrame("Miinaharava");
         frame.setPreferredSize(new Dimension(this.alustanLeveys, this.alustanKorkeus));
@@ -50,12 +53,10 @@ public class Kayttoliittyma extends JFrame implements Runnable {
     private void luoKomponentit(Container container) {
         JMenuBar valikko = luoValikko();
         ylaosanPaneeli = luoYlaPaneeli();
-
         pelialue = gMoottori.luoPelialue();
         alaosanPaneeli = luoAlaKentta();
 
         container.setLayout(new BorderLayout());
-
         frame.setJMenuBar(valikko);
         container.add(ylaosanPaneeli, BorderLayout.NORTH);
         container.add(pelialue, BorderLayout.CENTER);
@@ -63,7 +64,8 @@ public class Kayttoliittyma extends JFrame implements Runnable {
     }
 
     /**
-     * Pelin menuvalikko. Sisältää kolme vaikeustasoa ja pelin lopettamisen.
+     * Pelin menuvalikko. Sisältää kolme vaikeustasoa, tulostaulun ja pelin
+     * lopettamisen.
      *
      */
     private JMenuBar luoValikko() {
@@ -73,15 +75,17 @@ public class Kayttoliittyma extends JFrame implements Runnable {
         JMenuItem helppo = new JMenuItem("Helppo");
         JMenuItem normaali = new JMenuItem("Normaali");
         JMenuItem vaikea = new JMenuItem("Vaikea");
-
+        JMenu peli = new JMenu("Peli");
+        JMenuItem tulokset = new JMenuItem("Tulokset");
         JMenuItem lopetus = new JMenuItem("Lopetus");
 
         helppo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gMoottori.setKoko(10);
-                gMoottori.setMiinat(10);
-                alustanLeveys = 50 * 10;
+                gMoottori.setKoko(9);
+                gMoottori.setMiinat(9);
+                gMoottori.setVaikeustaso("helppo");
+                alustanLeveys = 50 * 9;
                 alustanKorkeus = alustanLeveys + 50;
                 uusiPeli();
             }
@@ -91,6 +95,7 @@ public class Kayttoliittyma extends JFrame implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 gMoottori.setKoko(16);
                 gMoottori.setMiinat(35);
+                gMoottori.setVaikeustaso("normaali");
                 alustanLeveys = 50 * 16;
                 alustanKorkeus = alustanLeveys + 50;
                 uusiPeli();
@@ -103,6 +108,7 @@ public class Kayttoliittyma extends JFrame implements Runnable {
                 gMoottori.setKoko(20);
                 gMoottori.setMiinat(80);
                 alustanLeveys = 50 * 20;
+                gMoottori.setVaikeustaso("vaikea");
                 alustanKorkeus = alustanLeveys + 50;
                 uusiPeli();
 
@@ -114,12 +120,20 @@ public class Kayttoliittyma extends JFrame implements Runnable {
                 System.exit(0);
             }
         });
+        tulokset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gMoottori.getTulostaulu().naytaTulokset();
+            }
+        });
 
         menubar.add(vaikeusaste);
         vaikeusaste.add(helppo);
         vaikeusaste.add(normaali);
         vaikeusaste.add(vaikea);
-        menubar.add(lopetus);
+        menubar.add(peli);
+        peli.add(tulokset);
+        peli.add(lopetus);
 
         return menubar;
     }
