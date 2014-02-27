@@ -100,15 +100,7 @@ public class Pelilogiikka {
      *
      * @param ruutu metodi saa arvona Ruutu-olion.
      */
-    /**
-     * Merkkaa ruudun avatuksi ja vähentää kiinni olevien ruutujen määrää
-     * yhdellä. Tarkistaa onko ruudussa miina. Jos ruudussa ei ole miinaa,
-     * vähennettään yksi miinattomiaRuutujaAvaamatta -arvosta. Lopuksi
-     * tarkistetaan onko peli voitettu kutsumalla onkoPeliVoitettu -metodia.
-     *
-     * @param ruutu avaa parametrinä olevan ruudun.
-     *
-     */
+
     public void avaaKenttaa(Ruutu ruutu) {
 
         int kentankoko = lauta.getKentanKoko();
@@ -135,6 +127,15 @@ public class Pelilogiikka {
         }
     }
 
+        /**
+     * Merkkaa ruudun avatuksi ja vähentää kiinni olevien ruutujen määrää
+     * yhdellä. Tarkistaa onko ruudussa miina. Jos ruudussa ei ole miinaa,
+     * vähennettään yksi miinattomiaRuutujaAvaamatta -arvosta. Lopuksi
+     * tarkistetaan onko peli voitettu kutsumalla onkoPeliVoitettu -metodia.
+     *
+     * @param ruutu avaa parametrinä olevan ruudun.
+     *
+     */
     public void avaaRuutu(Ruutu ruutu) {
         ruutu.setAvattu(true);
         this.ruutujaKiinni--;
@@ -144,8 +145,7 @@ public class Pelilogiikka {
         }
     }
 
-
-public Pelilauta getPelilauta() {
+    public Pelilauta getPelilauta() {
         return this.lauta;
     }
 }

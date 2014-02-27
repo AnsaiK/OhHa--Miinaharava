@@ -10,9 +10,15 @@ public class Pelilauta {
 
     private int miinojenLkm;
     private Ruutu[][] ruudut;
+
     Random random;
     private int kentanKoko;
 
+    /**
+     * Konstruktori luo laudan. Se kutsuu kolmea metodia laudan ruutujen
+     * luontia, miinojen arvomista, ja ympäröivien miinojen laskua varten.
+     *
+     */
     public Pelilauta(int leveys, int miinojenLkm) {
         this.kentanKoko = leveys;
         this.miinojenLkm = miinojenLkm;
@@ -24,8 +30,8 @@ public class Pelilauta {
     }
 
     /**
-     * Luo laudan ruudut kentän koon mukaan.
-     *
+     * Luo laudan ruudut kentän koon mukaan. Ruudut talletaan kaksiuloitteiseen
+     * taulukkoon.
      */
     private void luoLaudanRuudut() {
         for (int x = 0; x < kentanKoko; x++) {
@@ -64,23 +70,6 @@ public class Pelilauta {
             }
         }
     }
-
-    /**
-     * Testausta varten
-     */
-//    public void PiirraTekstiLauta() {   // testaukseen
-//        String lauta = "";
-//
-//        for (int i = 0; i < kentanKoko; i++) {
-//            if (i > 0) {
-//                lauta += "\n";
-//            }
-//            for (int j = 0; j < kentanKoko; j++) {
-//                lauta += this.ruudut[i][j].toString() + " ";
-//            }
-//        }
-//        System.out.println(lauta);
-//    }
 
     /**
      * Metodi käy läpi kentän ruudut. Asettaa jokaiselle ruudulle ympäroivien

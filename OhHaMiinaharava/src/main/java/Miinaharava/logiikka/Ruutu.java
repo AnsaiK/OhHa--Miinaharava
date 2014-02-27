@@ -13,6 +13,10 @@ public class Ruutu {
     private boolean avattu;
     private boolean lippu;
 
+    /**
+ * Konstruktori. Määrittelee miinan, avatun ruudun liputuksen tilaksi false. 
+ *
+ */
     public Ruutu(int x, int y) {
         this.x = x;
         this.y = y;

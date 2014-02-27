@@ -1,6 +1,6 @@
 package Miinaharava;
 
-import Miinaharava.Kayttoliittyma.Kayttoliittyma;
+import Miinaharava.GUI.Kayttoliittyma;
 import javax.swing.SwingUtilities;
 
 public class Miinaharava {
@@ -9,6 +9,5 @@ public class Miinaharava {
 
         Kayttoliittyma kali = new Kayttoliittyma();
         SwingUtilities.invokeLater(kali);
-
     }
 }
