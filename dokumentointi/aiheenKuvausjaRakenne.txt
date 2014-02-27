@@ -1,11 +1,37 @@
+
 Aihe: miinaharava
 
 Pelin kuvaus:
-
-Perinteinen yhden hengen miinaharavapeli, jossa pelaaja yrittää löytää ruudukosta miinat. Pelin alussa ruudukon sisältö on piilossa. Hiirellä klikattaessa ruutua sen sisältö tulee näkyviin. Avattu ruutu antaa numerovihjeen ympäröivien miinojen lukumäärästä. Tyhjää ruutua klikatessa aukeaa mahdollinen klikattuun ruutuun kosketuksissa oleva tyhjien ruutujen alue. Miinoja voi merkata lipulla ja epävarmoja ruutuja kysymysmerkillä.
+Perinteinen yhden hengen miinaharavapeli, jossa pelaaja yrittää löytää ruudukosta miinat. Pelin alussa ruudukon sisältö on piilossa. Hiirellä klikattaessa ruutua sen sisältö tulee näkyviin. Avattu ruutu antaa numerovihjeen ympäröivien miinojen lukumäärästä. Tyhjää ruutua klikatessa aukeaa mahdollinen klikattuun ruutuun kosketuksissa oleva tyhjien ruutujen alue. Miinoja ja epävarmoja ruutuja kysymysmerkillä.
 
 Peli on läpi, kun pelaaja on löytänyt yksiselitteisesti kaikki miinat. Peli loppuu jos pelaaja avaa miinan sisältävän ruudun.
 
 Pelin toiminnot: 
 - Uusi peli
 - Lopetus
+- kolme eri vaikeusasteen valintaa
+
+
+
+Pelin rakenne:
+Ohjelma on jaettu logiikan ja käyttöliittymän osalta omiin paketteihin. Logiikka-luokissa on pelin ydintoiminnat. Graafinen käyttöliittymä kokoaa logiikan toiminnot graafiseen muotoon.
+
+Logiikka:
+Logiikkapaketit pitää sisällään pelin toiminnan kannalta oleellisen logiikan.
+
+- Ruutu-luokka pitää sisällään ruutujen avaamisen tilan, onko ruudussa miina, ympäröivien pommien lkm ja x- ja y-koordinaatti.
+
+- Pelilauta-luokassa muodostetaan pelilauta kaksiulotteiseen taulukkoon. Laudalle arvotaan parametrina saatu määrä ruutuja ja miinoja. Miinattomien ruutujen viereisissä ruuduissa olevien miinojen lukumäärä lasketaan.
+
+Pelilogikka-luokka päivittää ruutujen tilaa pelitilanteen mukaan. Graafisen käyttöliittymän Grafiikkamoottori käyttää tätä luokkaa ohjatessaan pelin logiikkaa.
+
+
+Käyttöliittymä:
+Käyttöliittymä-luokka muodostaa pelin graafisen pelialustan. Luokka luo Grafiikkamoottorin ja Ylä- ja Alapaneelit.
+
+- AlaosaPaneeli ja YlaosaPaneeli muodostavat pelialustalle ylhäällä olevat kentät. Alapaneelissa on tekstikenttä johon grafiikkamoottori päivittää pelitilannetta. 
+Yläpaneelissa on peliin kulunut aika, uuden pelin valintanappi ja avaamattomien ruutujen määrä. Grafiikkamoottori päivittää näitä poislukien uuden pelin  nappi.
+
+- Grafiikkamoottori-luokka toimii pelin logiikan ja käyttöliittymän elementtien välissä. Luokka päivittää graafisia elementtejä ja pelilogiikka-luokkaa pelin edetessä. Grafiikkamoottori ei tunne muita graafiseen käyttöliittymään liittyviä luokkia, kuin itse käyttöliittymän.
+
+- HiiriKuuntelija välittää hiirenpainallukset grafiikkamoottori-luokalle, joka päivittää pelitilannetta painallusten mukaan.
