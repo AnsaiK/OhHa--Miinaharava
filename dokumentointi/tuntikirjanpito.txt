@@ -17,3 +17,4 @@ Tuntikirjanpito:
 26.2.	6h	Graafisen käyttöliittymän fiksailua ja HighScoren aloittelu
 27.2.	3h	Graafisen käyttöliitymän fiksailua (ei siis ole kovin hyvin hallussa..)
 28.2.	4h	HighScoren kanssa tappelua.
+29.2.	1h	HighScoren testit ja vikat pushaukset
